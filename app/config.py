@@ -32,6 +32,7 @@ class Config(object):
 
 class Devlopment(Config):
     """docstring for Devlopment"""
+    DEBUG = True
     MONGODB_SETTINGS = {
         'db': 'mygit',
         'host': 'localhost',
