@@ -54,19 +54,16 @@ class GithubSigIn(OAuthSignIn):
     def authorize(self):
         return redirect(self.service.get_authorize_url(
             scope='user',
-            response_type='code',
-            redirect_url=self.getCallbackURL()))
+            response_type='code',))
 
-    def callback(self):
-        if 'code' not in request.args:
-            return None, None, None
+    def callback(self,code):
+        if code is None:
+            return None,None,None
+        print code
         oauthSession = self.service.get_auth_session(
-            data=dict(code=request.args['code'],
-                      redirect_url=self.getCallbackURL(),
-                      scope='public_repo'))
-        print type(oauthSession)
-        print oauthSession
-        print "!!!!"
-        # me = oauthSession.get('user').json()
+            data=dict(code=code,
+                      client_id=self.consumerId,
+                      client_secret=self.consumerSecret))
+        me = oauthSession.get('https://api.github.com/user').json()
         # flash('Logged in as ' + me['name'])
-        return redirect(url_for('index'))
+        return me
