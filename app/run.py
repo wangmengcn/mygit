@@ -87,8 +87,8 @@ def load_user(username):
 
 
 @app.route('/')
-def index(data=None):
-    return render_template('index.html', data=data)
+def index():
+    return render_template('index.html')
 
 
 @app.route('/logout')
@@ -121,7 +121,7 @@ def oauth_callback():
         user.save()
     loginuser = User.objects(username=logininfo['login'])[0]
     login_user(loginuser)
-    return render_template('index.html', data=logininfo)
+    return render_template('index.html')
 
 
 if __name__ == '__main__':

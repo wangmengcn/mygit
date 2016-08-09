@@ -9,8 +9,8 @@
         {% endfor %}
         {% if current_user.is_authenticated %}
             <h2>Hi, {{ current_user.username }}!</h2>
-            <img src="{{data['avatar_url']}}" alt="">
-            <a href="{{data['html_url']}}"></a>
+            <img src="{{current_user.avatar_url}}" alt="">
+            <a href="{{current_user.html_url}}"></a>
             <p><a href="{{ url_for('logout') }}">Logout</a></p>
         {% else %}
             <h2>I don't know you!</h2>
