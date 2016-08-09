@@ -7,8 +7,8 @@
         {% for message in get_flashed_messages() %}
             <p>{{ message }}</p>
         {% endfor %}
-        {% if data %}
-            <h2>Hi, {{ data['login'] }}!</h2>
+        {% if current_user.is_authenticated %}
+            <h2>Hi, {{ current_user.username }}!</h2>
             <img src="{{data['avatar_url']}}" alt="">
             <a href="{{data['html_url']}}"></a>
             <p><a href="{{ url_for('logout') }}">Logout</a></p>

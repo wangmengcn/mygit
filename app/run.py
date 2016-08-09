@@ -21,7 +21,6 @@ mail = Mail()
 moment = Moment()
 db = MongoEngine()
 pagedown = PageDown()
-logininfo = None
 
 
 class User(UserMixin, db.Document):
@@ -35,33 +34,37 @@ class User(UserMixin, db.Document):
 
     @property
     def get_id(self):
-        return self.username
+        return self.uniqueID
 
     @property
     def is_authenticated(self):
-        return self.authenticated
+        return True
 
     @property
     def is_anonymous(self):
         # False as we do not support annonymity
         return False
 
+    @classmethod
+    def uniqueID(self):
+        return unicode(self.id)
+
     @staticmethod
     def query(username):
         result = User.objects(username=username)
-        print type(result)
-        # value = User(username=result['username'], avatar_url=result[
-        #              'avatar_url'], html_url=result['html_url'])
-        return None
-
+        if len(result) != 0:
+            value = result[0].id
+            return value
+        else:
+            return None
 
 
 app = Flask(__name__)
 app.config.from_object(config['defualt'])
 app.config['OAUTH_CREDENTIALS'] = {
     'Github': {
-        'id': 'bc4af5803f36aff59f99',
-        'secret': 'ef60630f29923fe11556d8cf5644771029ade749'
+        'id': '0f62b7a7773d1a3611cb',
+        'secret': 'b1f6a9f138b4e1e2fcc787e8a8b78e6ff080fe93'
     },
     'twitter': {
         'id': '3RzWQclolxWZIMq5LJqzRZPTl',
@@ -74,25 +77,30 @@ mail.init_app(app)
 moment.init_app(app)
 db.init_app(app)
 pagedown.init_app(app)
+lm = LoginManager(app)
+lm.login_view = 'index'
 
 
-# @login_manager.user_loader
-# def load_user(username):
-#     return User.query(username)
+@lm.user_loader
+def load_user(username):
+    return User.query(username)
 
 
 @app.route('/')
 def index(data=None):
-    return render_template('index.html',data=data)
+    return render_template('index.html', data=data)
 
 
 @app.route('/logout')
 def logout():
-    return redirect(url_for('index',data=None))
+    logout_user()
+    return redirect(url_for('index'))
 
 
 @app.route('/authorize/<provider>')
 def oauth_authorize(provider):
+    if not current_user.is_anonymous:
+        return redirect(url_for('index'))
     try:
         oauth = OAuthSignIn.getProvider(provider)
         return oauth.authorize()
@@ -106,10 +114,14 @@ def oauth_callback():
     print code
     oauth = OAuthSignIn.getProvider('Github')
     logininfo = oauth.callback(code)
+    flag = User.objects(username=logininfo['login'])
     user = User(username=logininfo['login'], avatar_url=logininfo[
-                'avatar_url'], html_url=logininfo['html_url'])
-    user.save()
-    return render_template('index.html',data=logininfo)
+        'avatar_url'], html_url=logininfo['html_url'])
+    if len(flag) == 0:
+        user.save()
+    loginuser = User.objects(username=logininfo['login'])[0]
+    login_user(loginuser)
+    return render_template('index.html', data=logininfo)
 
 
 if __name__ == '__main__':
