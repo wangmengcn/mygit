@@ -66,3 +66,37 @@ class GithubSigIn(OAuthSignIn):
         me = oauthSession.get('https://api.github.com/user').json()
         # flash('Logged in as ' + me['name'])
         return me
+
+
+class BattlenetSignIn(OAuthSignIn):
+    """docstring for GithubSigIn"""
+
+    def __init__(self):
+        super(BattlenetSignIn, self).__init__('BattleNet')
+        self.service = OAuth2Service(
+            name='BattleNet',
+            client_id=self.consumerId,
+            client_secret=self.consumerSecret,
+            authorize_url='https://www.battlenet.com.cn/oauth/authorize',
+            access_token_url='https://www.battlenet.com.cn/oauth/token',
+        )
+
+    def authorize(self):
+        return redirect(self.service.get_authorize_url(
+            client_id=self.consumerId,
+            response_type='code',
+            redirect_uri='https://localhost:5000/callback/BattleNet'))
+
+    def callback(self, code):
+        if code is None:
+            return None, None, None
+        oauthSession = self.service.get_auth_session(
+            data=dict(code=code,
+                      client_id=self.consumerId,
+                      client_secret=self.consumerSecret,
+                      grant_type='authorization_code',
+                      redirect_uri='https://localhost:5000/callback/BattleNet'))
+        me = oauthSession.get(
+            'https://api.battlenet.com.cn/account/user').json()
+        # flash('Logged in as ' + me['name'])
+        return me
