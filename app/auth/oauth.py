@@ -59,7 +59,6 @@ class GithubSigIn(OAuthSignIn):
     def callback(self, code):
         if code is None:
             return None, None, None
-        print code
         oauthSession = self.service.get_auth_session(
             data=dict(code=code,
                       client_id=self.consumerId,

@@ -45,9 +45,9 @@ class Devlopment(Config):
             'id': '0f62b7a7773d1a3611cb',
             'secret': 'b1f6a9f138b4e1e2fcc787e8a8b78e6ff080fe93'
         },
-        'twitter': {
-            'id': '3RzWQclolxWZIMq5LJqzRZPTl',
-            'secret': 'm9TEd58DSEtRrZHpz2EjrV9AhsBRxKMo8m3kuIZj3zLwzwIimt'
+        'BattleNet': {
+            'id': 'u5f2bjpvwbmd4mx8rew9bb69jghgdaeq',
+            'secret': 'QyxCy37GcY8W2nCQ8gVpFAWXMmHX2kSv'
         }
     }
 

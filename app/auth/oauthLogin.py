@@ -31,7 +31,6 @@ def oauth_authorize(provider):
 @auth.route('/callback/Github')
 def oauth_callback():
     code = request.args.get('code', 1, type=str)
-    print code
     oauth = OAuthSignIn.getProvider('Github')
     logininfo = oauth.callback(code)
     flag = User.objects(username=logininfo['login'])
