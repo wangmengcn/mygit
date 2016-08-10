@@ -40,6 +40,16 @@ class Devlopment(Config):
     }
     MYGIT_REDIS_HOST = 'localhost'
     MYGIT_REDIS_PORT = 6379
+    OAUTH_CREDENTIALS = {
+        'Github': {
+            'id': '0f62b7a7773d1a3611cb',
+            'secret': 'b1f6a9f138b4e1e2fcc787e8a8b78e6ff080fe93'
+        },
+        'twitter': {
+            'id': '3RzWQclolxWZIMq5LJqzRZPTl',
+            'secret': 'm9TEd58DSEtRrZHpz2EjrV9AhsBRxKMo8m3kuIZj3zLwzwIimt'
+        }
+    }
 
 
 config = {

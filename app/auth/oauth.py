@@ -5,8 +5,8 @@
 # @Link    : https://eclipsesv.com
 # @Version : $Id$
 
-from rauth import OAuth1Service, OAuth2Service
-from flask import current_app, url_for, request, redirect, session
+from rauth import OAuth2Service
+from flask import current_app, redirect
 
 
 class OAuthSignIn(object):
@@ -56,9 +56,9 @@ class GithubSigIn(OAuthSignIn):
             scope='user',
             response_type='code',))
 
-    def callback(self,code):
+    def callback(self, code):
         if code is None:
-            return None,None,None
+            return None, None, None
         print code
         oauthSession = self.service.get_auth_session(
             data=dict(code=code,
