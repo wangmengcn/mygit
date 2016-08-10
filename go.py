@@ -9,6 +9,7 @@ from app import createApp
 running = createApp('defualt')
 
 
+# 将flask的访问方式改为https,需要用openssl生成mygit.crt, mygit.key
 if __name__ == '__main__':
     context = ('mygit.crt', 'mygit.key')
     running.run(ssl_context=context, threaded=True)

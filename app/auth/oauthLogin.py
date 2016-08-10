@@ -41,3 +41,19 @@ def oauth_callback():
     loginuser = User.objects(username=logininfo['login'])[0]
     login_user(loginuser)
     return render_template('index.html')
+
+
+@auth.route('/callback/BattleNet')
+def Battlenet_oauth_callback():
+    code = request.args.get('code', 1, type=str)
+    oauth = OAuthSignIn.getProvider('BattleNet')
+    logininfo = oauth.callback(code)
+    print logininfo
+    flag = User.objects(username=logininfo['battletag'])
+    user = User(username=logininfo['battletag'],
+                html_url=logininfo['id'])
+    if len(flag) == 0:
+        user.save()
+    loginuser = User.objects(username=logininfo['battletag'])[0]
+    login_user(loginuser)
+    return render_template('index.html')
