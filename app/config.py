@@ -11,7 +11,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     """docstring for Config"""
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'secret'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'can not guess'
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
