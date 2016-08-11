@@ -9,7 +9,9 @@ def load_user(username):
 
 
 class User(UserMixin, db.Document):
-    username = db.StringField(required=True)
+    username = db.StringField(required=True, max_length=15)
+    email = db.StringField(max_length=40)
+    password = db.StringField(max_length=15)
     avatar_url = db.StringField(max_length=100)
     html_url = db.StringField(max_length=100)
 
@@ -42,3 +44,9 @@ class User(UserMixin, db.Document):
             return value
         else:
             return None
+
+    @classmethod
+    def verify_password(pswd):
+        if password == pswd:
+            return True
+        return False

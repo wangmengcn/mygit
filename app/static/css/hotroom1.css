@@ -1,0 +1,23 @@
+#divchat {
+	height: 290px;
+}
+
+#messages {
+	color: #31708f;
+	background: #d9edf7;
+}
+
+body {
+	background-color: rgba(8, 8, 8, 0.72);
+}
+
+.jumbotron {
+	margin-bottom: -5px;
+}
+
+.nopx {
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: :0px;
+	margin-right: 0px;
+}
