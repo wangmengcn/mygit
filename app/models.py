@@ -33,8 +33,8 @@ class User(UserMixin, db.Document):
         return False
 
     @classmethod
-    def uniqueID(self):
-        return unicode(self.id)
+    def uniqueID(cls):
+        return unicode(cls.id)
 
     @staticmethod
     def query(username):

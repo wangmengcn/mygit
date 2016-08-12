@@ -20,30 +20,30 @@ class OAuthSignIn(object):
         self.consumerSecret = credentials['secret']
 
     def authorize(self):
-        '''
+        """
         此方法用于将当前页面跳转至用户认证页面，并在完成认证之后，带着从OAUTH服务器获得
         的code转到callbackurl
-        '''
+        """
         pass
 
-    def callback(self):
-        '''
+    def callback(self,code):
+        """
         有了authorize返回的code之后，将code、client_id、client_secret post给OAUTH
         服务器，获得到用以获取用户数据的token
-        '''
+        """
         pass
 
     def getCallbackURL(self):
         pass
 
     @classmethod
-    def getProvider(self, providerName):
-        if self.providers is None:
-            self.providers = {}
-            for providerClass in self.__subclasses__():
+    def getProvider(cls, providerName):
+        if cls.providers is None:
+            cls.providers = {}
+            for providerClass in cls.__subclasses__():
                 provider = providerClass()
-                self.providers[provider.providerName] = provider
-        return self.providers[providerName]
+                cls.providers[provider.providerName] = provider
+        return cls.providers[providerName]
 
 
 class GithubSigIn(OAuthSignIn):
@@ -112,3 +112,4 @@ class BattlenetSignIn(OAuthSignIn):
             'https://api.battlenet.com.cn/account/user').json()
         # flash('Logged in as ' + me['name'])
         return me
+

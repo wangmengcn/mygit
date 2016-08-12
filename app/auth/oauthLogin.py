@@ -6,6 +6,7 @@
 # @Version : $Id$
 from flask import redirect, url_for, request, render_template
 from flask.ext.login import login_user, logout_user, current_user
+
 from . import auth
 from .oauth import OAuthSignIn
 from ..models import User
