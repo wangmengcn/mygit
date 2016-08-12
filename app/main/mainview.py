@@ -9,5 +9,5 @@ from . import main
 
 
 @main.route('/')
-def mainIndex():
+def main_index():
     return render_template('index.html')

@@ -53,5 +53,5 @@ class Devlopment(Config):
 
 
 config = {
-    'defualt': Devlopment
+    'default': Devlopment
 }

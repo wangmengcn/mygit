@@ -6,7 +6,7 @@
 # @Version : $Id$
 from app import createApp
 
-running = createApp('defualt')
+running = createApp('default')
 
 
 # 将flask的访问方式改为https,需要用openssl生成mygit.crt, mygit.key

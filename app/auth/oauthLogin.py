@@ -14,7 +14,7 @@ from ..models import User
 @auth.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('main.mainIndex'))
+    return redirect(url_for('main.main_index'))
 
 
 @auth.route('/authorize/<provider>')

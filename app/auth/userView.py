@@ -9,7 +9,7 @@ from flask import redirect, url_for, request, render_template, flash
 from flask.ext.login import login_user, logout_user, current_user
 from . import auth
 from ..models import User
-from authforms import LoginForm, RegistForm
+from authforms import LoginForm, RegisterForm
 
 
 @auth.route('/reset')
@@ -19,12 +19,12 @@ def password_reset_request():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegistForm()
+    form = RegisterForm()
     if form.validate_on_submit():
         user = User(username=form.username.data,
                     email=form.email.data, password=form.password.data)
         user.save()
-        return redirect(url_for('main.mainIndex'))
+        return redirect(url_for('main.main_index'))
     return render_template('auth/register.html', form=form)
 
 

@@ -33,7 +33,7 @@ class LoginForm(Form):
     submit = SubmitField('Login')
 
 
-class RegistForm(Form):
+class RegisterForm(Form):
     """docstring for RegistForm"""
     username = StringField('Username', validators=[Required(), Length(max=15)])
     email = StringField('Email', validators=[
