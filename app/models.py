@@ -12,7 +12,7 @@ class User(UserMixin, db.Document):
     username = db.StringField(required=True, max_length=15)
     email = db.StringField(max_length=40)
     password = db.StringField(max_length=15)
-    avatar_url = db.StringField(max_length=100)
+    # avatar_url = db.FileFiled(max_length=100)
     html_url = db.StringField(max_length=100)
 
     @property
@@ -49,3 +49,11 @@ class User(UserMixin, db.Document):
         if self.password == pswd:
             return True
         return False
+
+
+class Profile(db.Document):
+    username = db.ReferenceField(User)
+    location = db.StringField(max_length=100)
+    job = db.StringField(max_length=30)
+    position = db.StringField(max_length=30)
+    filed = db.StringField(max_length=20)

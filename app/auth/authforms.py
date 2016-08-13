@@ -42,3 +42,7 @@ class RegisterForm(Form):
         'repeatpsw', 'Password should be the same'), Length(max=15, min=6)])
     repeatpsw = PasswordField('Confirm Password', validators=[Required()])
     submit = SubmitField('Confirm')
+
+class ProfileForm(Form):
+    pass
+

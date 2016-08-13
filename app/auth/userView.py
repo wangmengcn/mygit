@@ -12,8 +12,12 @@ from ..models import User
 from authforms import LoginForm, RegisterForm
 
 
-@auth.route('/reset')
+@auth.route('/reset_password')
 def password_reset_request():
+    pass
+
+@auth.route('/reset_email')
+def email_reset_request():
     pass
 
 
@@ -38,3 +42,4 @@ def login():
             return render_template('index.html')
         flash('Invalid username or password.')
     return render_template('auth/login.html', form=form)
+

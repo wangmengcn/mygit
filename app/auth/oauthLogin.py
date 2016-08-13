@@ -52,7 +52,7 @@ def Battlenet_oauth_callback():
     print logininfo
     flag = User.objects(username=logininfo['battletag'])
     user = User(username=logininfo['battletag'],
-                html_url=logininfo['id'])
+                html_url=str(logininfo['id']))
     if len(flag) == 0:
         user.save()
     loginuser = User.objects(username=logininfo['battletag'])[0]
