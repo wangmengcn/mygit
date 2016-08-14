@@ -4,7 +4,7 @@
 # @Author  : Wangmengcn (eclipse_sv@163.com)
 # @Link    : https://eclipsesv.com
 # @Version : $Id$
-from flask import render_template,redirect,url_for
+from flask import render_template, redirect, url_for
 from . import main
 
 
@@ -16,3 +16,8 @@ def main_index():
 @main.route('/profile')
 def profile():
     return redirect(url_for('main.profile'))
+
+
+@main.before_app_first_request
+def first_request():
+    return 'Hello!'
