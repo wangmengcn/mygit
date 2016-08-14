@@ -52,7 +52,7 @@ class User(UserMixin, db.Document):
 
 
 class Profile(db.Document):
-    username = db.ReferenceField(User)
+    user = db.ReferenceField(User)
     location = db.StringField(max_length=100)
     job = db.StringField(max_length=30)
     position = db.StringField(max_length=30)

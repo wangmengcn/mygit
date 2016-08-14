@@ -4,10 +4,15 @@
 # @Author  : Wangmengcn (eclipse_sv@163.com)
 # @Link    : https://eclipsesv.com
 # @Version : $Id$
-from flask import render_template
+from flask import render_template,redirect,url_for
 from . import main
 
 
 @main.route('/')
 def main_index():
     return render_template('index.html')
+
+
+@main.route('/profile')
+def profile():
+    return redirect(url_for('main.profile'))
