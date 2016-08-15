@@ -12,7 +12,7 @@ class User(UserMixin, db.Document):
     username = db.StringField(required=True, max_length=15)
     email = db.StringField(max_length=40)
     password = db.StringField(max_length=15)
-    # avatar_url = db.FileFiled(max_length=100)
+    avatar = db.FileField()
     html_url = db.StringField(max_length=100)
 
     @property
