@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block head %} 
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="../static/css/md.css">
+{% endblock %}
+{% block content %}
+{{ super() }}
+<div class="container-fluid">
+	<div class='col-md-6' id="md-input">
+		<strong>What are you thinking?</strong>
+		<br>
+		<textarea class="txt-input" >
+			
+		</textarea>
+	</div>
+	<div class='col-md-6' id="md-preview" >
+		<strong>Preview</strong>
+		<br>	
+		<textarea class="txt-preview" ></textarea>
+	</div>
+	<br>
+	<button style="margin-top:25px" type="button" class="btn  btn-default navbar-btn" >Submit</button>
+</div>
+{% endblock %}

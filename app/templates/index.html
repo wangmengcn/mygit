@@ -2,8 +2,5 @@
 {% block content %}
 {{ super() }}
 <div class="container">
-    {% if current_user.is_authenticated %}
-        <p>Hello! {{current_user.username}}</p>
-    {% endif %}
 </div>
 {% endblock %}
