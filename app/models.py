@@ -1,11 +1,12 @@
-
+import bson
 from flask.ext.login import UserMixin
 from . import db, lm
+from mongoengine import fields
 
 
 @lm.user_loader
-def load_user(username):
-    return User.query(username)
+def load_user(uid):
+    return User.query(bson.objectid.ObjectId(str(uid)))
 
 
 class User(UserMixin, db.Document):
@@ -19,9 +20,9 @@ class User(UserMixin, db.Document):
     def is_active(self):
         return True
 
-    @property
-    def get_id(self):
-        return self.uniqueID
+    # @property
+    # def get_id(self):
+    #     return self.uniqueID
 
     @property
     def is_authenticated(self):
@@ -33,14 +34,14 @@ class User(UserMixin, db.Document):
         return False
 
     @classmethod
-    def uniqueID(cls):
-        return unicode(cls.id)
+    def uniqueID(self):
+        return unicode(self.id)
 
     @staticmethod
-    def query(username):
-        result = User.objects(username=username)
+    def query(uid):
+        result = User.objects(id=uid)
         if len(result) != 0:
-            value = result[0].id
+            value = result[0]
             return value
         else:
             return None
