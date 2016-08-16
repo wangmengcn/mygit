@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+{{ super() }}
+<div class="col-md-offset-2 col-md-8">
+	{% if form %}
+		{{ wtf.quick_form(form) }}
+	{% endif %}
+</div>
+{% endblock %}
