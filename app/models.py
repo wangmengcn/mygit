@@ -1,7 +1,6 @@
 import bson
 from flask.ext.login import UserMixin
 from . import db, lm
-from mongoengine import fields
 
 
 @lm.user_loader
