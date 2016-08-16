@@ -11,19 +11,6 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import Email, Required, Length, EqualTo
 
 
-# class AuthBaseForm(Form):
-#     """配置csrf,之后的所有窗体都继承于此"""
-#     class Meta(object):
-#         """docstring for Meta"""
-#         csrf = True
-#         csrf_class = SessionCSRF
-#         csrf_secret = 'auth csrf can not guess'
-
-#         @property
-#         def csrf_context(self):
-#             return session
-
-
 class LoginForm(Form):
     """docstring for FirstForm"""
     username = StringField('Username', validators=[Required(), Length(max=15)])
@@ -42,7 +29,3 @@ class RegisterForm(Form):
         'repeatpsw', 'Password should be the same'), Length(max=15, min=6)])
     repeatpsw = PasswordField('Confirm Password', validators=[Required()])
     submit = SubmitField('Confirm')
-
-class ProfileForm(Form):
-    pass
-

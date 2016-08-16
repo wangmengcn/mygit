@@ -2,7 +2,7 @@ from flask import Flask
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.mail import Mail
 from flask.ext.moment import Moment
-from flask_mongoengine import MongoEngine
+from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
 from flask.ext.login import LoginManager
 from flask.ext.pagedown import PageDown
 from config import config
@@ -13,19 +13,21 @@ moment = Moment()
 db = MongoEngine()
 pagedown = PageDown()
 lm = LoginManager()
-lm.login_view = 'index'
+lm.session_protection = 'strong'
+lm.login_view = 'auth.login'
 
 
 def createApp(name):
     app = Flask(__name__)
     app.config.from_object(config[name])
 
+    lm.init_app(app)
     bootstrap.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
     db.init_app(app)
+    app.session_interface = MongoEngineSessionInterface(db)
     pagedown.init_app(app)
-    lm.init_app(app)
 
     from .main import main as mainBluePrint
     app.register_blueprint(mainBluePrint)
