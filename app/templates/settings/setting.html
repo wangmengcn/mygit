@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block head %} 
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="../static/css/md.css">
+{% endblock %}
+{% block content %}
+{{ super() }}
+<div class="container" id="setting">
+	<div class="panel panel-default" id="setting-panel">
+		<div class="panel-heading">Personal settings</div>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<a href="{{url_for('setting.password_reset_request')}}">Reset Password</a>
+			</li>
+			<li class="list-group-item">
+				<a href="{{url_for('setting.email_reset_request')}}">Reset Email</a>
+			</li>
+		</ul>
+	</div>
+	<div class="panel panel-default" id="content-panel">
+		{% block setting%}
+		{% endblock %}
+	</div>
+</div>
+{% endblock %}

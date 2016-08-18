@@ -22,7 +22,7 @@ def password_reset_request():
             flash('Password changed! Please Login in')
             return render_template('index.html')
         flash('Invalid password.')
-    return render_template('setting/resetpsw.html', form=form)
+    return render_template('settings/resetpsw.html', form=form)
 
 
 @setting.route('/reset_email', methods=['GET', 'POST'])
@@ -36,4 +36,10 @@ def email_reset_request():
             flash('Email changed!')
             return redirect(url_for('main.main_index'))
         flash('Invalid email')
-    return render_template('setting/resetemil.html', form=form)
+    return render_template('settings/resetemil.html', form=form)
+
+
+@setting.route('/default')
+@login_required
+def personal_setting():
+    return render_template('settings/setting.html')
