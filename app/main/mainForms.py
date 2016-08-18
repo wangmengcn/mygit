@@ -3,7 +3,6 @@ from wtforms import StringField, FileField, SubmitField, TextAreaField
 from wtforms.validators import EqualTo, Required, Length
 from flask.ext.login import login_user, logout_user, current_user
 from flask_pagedown.fields import PageDownField
-from ..models import User, Profile
 
 
 class ProfileForm(Form):

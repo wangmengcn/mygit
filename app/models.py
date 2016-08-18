@@ -13,7 +13,6 @@ class User(UserMixin, db.Document):
     email = db.StringField(max_length=40)
     password = db.StringField(max_length=15)
     avatar = db.FileField()
-    html_url = db.StringField(max_length=100)
 
     @property
     def is_active(self):
@@ -46,6 +45,29 @@ class User(UserMixin, db.Document):
 class Profile(db.Document):
     user = db.ReferenceField(User)
     location = db.StringField(max_length=100)
+    education = db.StringField(max_length=50)
     job = db.StringField(max_length=30)
     position = db.StringField(max_length=30)
-    filed = db.StringField(max_length=20)
+    bio = db.StringField(max_length=50)
+
+class Post(db.Document):
+    """docstring for Post"""
+    user = db.ReferenceField(User)
+    title = db.StringField(max_length=50)
+    tag = db.ListField()
+    body = db.StringField(max_length=10000)
+    date = db.DateTimeField()
+
+
+class Comment(db.Document):
+    """docstring for Comments"""
+    post = db.ReferenceField(Post)
+    commenter = db.ReferenceField(User)
+    content = db.StringField(max_length=200)
+    date = db.DateTimeField()
+
+
+
+
+        
+    
