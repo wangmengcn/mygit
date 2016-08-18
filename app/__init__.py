@@ -35,4 +35,7 @@ def createApp(name):
     from .auth import auth as authBluePrint
     app.register_blueprint(authBluePrint)
 
+    from .settings import setting as settingBluePrint
+    app.register_blueprint(settingBluePrint, url_prefix='/setting')
+
     return app

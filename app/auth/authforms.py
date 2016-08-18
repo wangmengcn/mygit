@@ -29,21 +29,3 @@ class RegisterForm(Form):
         'repeatpsw', 'Password should be the same'), Length(max=15, min=6)])
     repeatpsw = PasswordField('Confirm Password', validators=[Required()])
     submit = SubmitField('Confirm')
-
-
-class ResetPasswordForm(Form):
-    """docstring for ResetPasswordForm"""
-    oldpsw = PasswordField('Old Password', validators=[
-                           Required(), Length(max=15, min=6)])
-    newpsw = PasswordField('New Password', validators=[Required(), Length(max=15, min=6), EqualTo('confrimpsw')])
-    confrimpsw = PasswordField('Confrim password', validators=[Required()])
-    submit = SubmitField('Change Password')
-
-
-class ResetEmailForm(Form):
-    """docstring for ResetEmailForm"""
-    oldemil = StringField("Old Email", validators=[
-                          Required(), Length(max=40), Email()])
-    newemail = StringField("New Email", validators=[
-                           Required(), Length(max=40), Email()])
-    submit = SubmitField("Change Email")
