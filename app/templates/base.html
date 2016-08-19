@@ -6,6 +6,8 @@
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<script src="../static/js/Douyufanjquery.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
 {% endblock %}
 
 {% block navbar %}
@@ -63,8 +65,3 @@
     {% block page_content %}{% endblock %}
 </div>
 {% endblock %}
-
-<footer>
-	<script src="../static/js/Douyufanjquery.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
-</footer>

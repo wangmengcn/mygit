@@ -1,25 +1,30 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 {% block head %} 
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="../static/css/md.css">
+<link rel="stylesheet" type="text/css" href="../static/css/editormd.min.css" />
+<script src="../static/editormd.js"></script>
 {% endblock %}
-{% block content %}
+{% block page_content %}
 {{ super() }}
-<div class="container-fluid">
-	<div class='col-md-6' id="md-input">
-		<strong>What are you thinking?</strong>
-		<br>
-		<textarea class="txt-input" >
-			
-		</textarea>
+<div class="container-fluid" style="height:800px">
+	<div id="editormd">
+    	<textarea style="display:none;">### Hello Editor.md !</textarea>
 	</div>
-	<div class='col-md-6' id="md-preview" >
-		<strong>Preview</strong>
-		<br>	
-		<textarea class="txt-preview" ></textarea>
-	</div>
-	<br>
-	<button style="margin-top:25px" type="button" class="btn  btn-default navbar-btn" >Submit</button>
 </div>
+<script type="text/javascript">
+    $(function() {
+        // var editor = editormd("editormd", {
+        //     path : "../static/lib/" // Autoload modules mode, codemirror, marked... dependents libs path
+        // });
+
+        
+        // or
+        var editor = editormd({
+            id   : "editormd",
+            path : "../lib/"
+        });
+        
+    });
+</script>
 {% endblock %}
