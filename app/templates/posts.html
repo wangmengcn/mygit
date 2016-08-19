@@ -1,30 +1,22 @@
-{% extends "base.html" %}
-{% block head %} 
-{{ super() }}
-<link rel="stylesheet" type="text/css" href="../static/css/md.css">
-<link rel="stylesheet" type="text/css" href="../static/css/editormd.min.css" />
-<script src="../static/editormd.js"></script>
-{% endblock %}
-{% block page_content %}
-{{ super() }}
-<div class="container-fluid" style="height:800px">
-	<div id="editormd">
-    	<textarea style="display:none;">### Hello Editor.md !</textarea>
+<html>
+	<head>
+		<link rel="stylesheet" href="../static/css/editormd.min.css" />
+	</head>
+	<body>
+	<div class="layout">
+		<div id="editormd">
+		    <textarea style="display:none;">### Hello Editor.md !</textarea>
+		</div>
 	</div>
-</div>
-<script type="text/javascript">
-    $(function() {
-        // var editor = editormd("editormd", {
-        //     path : "../static/lib/" // Autoload modules mode, codemirror, marked... dependents libs path
-        // });
-
-        
-        // or
-        var editor = editormd({
-            id   : "editormd",
-            path : "../lib/"
-        });
-        
-    });
-</script>
-{% endblock %}
+		
+		<script src="../static/js/Douyufanjquery.min.js"></script>
+		<script src="../static/editormd.min.js"></script>
+		<script type="text/javascript">
+		    $(function() {
+		        var editor = editormd("editormd", {
+		            path : "../static/lib/" // Autoload modules mode, codemirror, marked... dependents libs path
+		        });        
+		    });
+		</script>
+	</body>
+</html>
