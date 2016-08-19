@@ -61,7 +61,19 @@ def posts():
             post = Post(user=user.id, title=title, body=body, date=date)
             post.save()
             posts = []
-            for post in Post.objects(usr=user.id):
+            for post in Post.objects(user=user.id):
                 posts.append(post)
             return render_template('index.html', posts=posts)
     return render_template('posts.html')
+
+
+@main.route('/post/<string:title>')
+@login_required
+def getpost(title):
+    if title:
+        posts = []
+        for post in Post.objects(title=title):
+            posts.append(post)
+        if post is not None:
+            return render_template('index.html', posts=posts)
+    return redirect(url_for('main.main_index'))
