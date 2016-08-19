@@ -2,5 +2,17 @@
 {% block content %}
 {{ super() }}
 <div class="container">
+	{%if current_user.is_authenticated%}
+		{%if posts%}
+			{%for post in posts%}
+				<h2>{{post.title}}</h2>
+					{{ post.body | markdown }}
+			{%endfor%}
+		{%else%}
+			<h2>还没有发表过文章，<a href="{{url_for('main.main_index')}}">去写一篇</a> </h2>
+		{%endif%}
+	{%else%}
+		<h2>还未登陆，<a href="{{url_for('auth.login')}}">去登陆</a></h2>
+	{%endif%}
 </div>
 {% endblock %}

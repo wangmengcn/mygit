@@ -4,6 +4,7 @@ from flask.ext.mail import Mail
 from flask.ext.moment import Moment
 from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
 from flask.ext.login import LoginManager
+from flaskext.markdown import Markdown
 from flask.ext.pagedown import PageDown
 from config import config
 
@@ -27,6 +28,7 @@ def createApp(name):
     moment.init_app(app)
     db.init_app(app)
     app.session_interface = MongoEngineSessionInterface(db)
+    Markdown(app)
     pagedown.init_app(app)
 
     from .main import main as mainBluePrint

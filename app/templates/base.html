@@ -33,7 +33,7 @@
                 {% if current_user.is_authenticated %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img style="height:20px" src="https://o3sw4xojp.qnssl.com/c66cb2fb1e610a03bbebf258fb3210f1.jpg"  alt="">
+                    <img style="height:20px" src="https://o3sw4xojp.qnssl.com/c66cb2fb1e610a03bbebf258fb3210f1.jpg">
                     </a>
                     <ul class="dropdown-menu">
                         <p style="padding:3px 20px">Login in as {{current_user.username}}</p>
@@ -57,7 +57,7 @@
 <div class="container">
     {% for message in get_flashed_messages() %}
     <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <button type="button" class="close" data-dismiss="alert"></button>
         {{ message }}
     </div>
     {% endfor %}

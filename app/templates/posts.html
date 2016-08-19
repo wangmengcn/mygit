@@ -13,11 +13,20 @@
 <link rel="stylesheet" href="../static/css/style.css" />
 {%endblock%}
 {%block page_content%}
-<div class="layout">
-	<div id="editormd">
-	    <textarea style="display:none;">### 用markdown写下你的想法吧 !</textarea>
+<form action="{{url_for('main.posts')}}" method="post">
+	<div class="input-group input-group-lg" style="width:100%">
+	  <input type="text" class="form-control" placeholder="Input your title" aria-describedby="sizing-addon1" name="post_title">
 	</div>
-</div>
+	<div class="layout">
+		<div id="editormd">
+		    <textarea style="display:none;">### 用markdown写下你的想法吧 !</textarea>
+		</div>
+	</div>
+	<div style="width:90%;margin: 10px auto;">
+        <input type="submit" name="submit" value="Publish" style="padding: 5px; float:left"> 
+    </div>
+</form>
+
 		
 	<script src="../static/js/Douyufanjquery.min.js"></script>
 	<script src="../static/editormd.min.js"></script>

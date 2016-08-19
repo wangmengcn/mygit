@@ -5,12 +5,13 @@
 # @Link    : https://eclipsesv.com
 # @Version : $Id$
 import os
-from flask import render_template, redirect, url_for, g
+from datetime import datetime
+from flask import render_template, redirect, url_for, g, request
 from flask.ext.login import login_required, current_user
 
 from . import main
 from mainForms import ProfileForm, PostForm
-from ..models import Profile
+from ..models import Profile, Post
 
 
 @main.before_app_request
@@ -20,6 +21,11 @@ def before_request():
 
 @main.route('/')
 def main_index():
+    if current_user.is_authenticated:
+        posts = []
+        for post in Post.objects(user=current_user.id):
+            posts.append(post)
+        return render_template('index.html', posts=posts)
     return render_template('index.html')
 
 
@@ -43,10 +49,19 @@ def userSetting():
     pass
 
 
-@main.route('/post')
+@main.route('/post', methods=['GET', 'POST'])
 @login_required
 def posts():
-    form = PostForm()
-    if form.validate_on_submit():
-        return redirect(url_for('main.main_index'))
-    return render_template('posts.html', form=form)
+    if request.method == 'POST':
+        title = request.form['post_title']
+        body = request.form['editormd-markdown-doc']
+        date = datetime.now()
+        user = current_user
+        if request.form['post_title']:
+            post = Post(user=user.id, title=title, body=body, date=date)
+            post.save()
+            posts = []
+            for post in Post.objects(usr=user.id):
+                posts.append(post)
+            return render_template('index.html', posts=posts)
+    return render_template('posts.html')
