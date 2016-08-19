@@ -1,22 +1,31 @@
 <html>
 	<head>
-		<link rel="stylesheet" href="../static/css/editormd.min.css" />
+		
 	</head>
 	<body>
-	<div class="layout">
-		<div id="editormd">
-		    <textarea style="display:none;">### Hello Editor.md !</textarea>
-		</div>
-	</div>
 		
-		<script src="../static/js/Douyufanjquery.min.js"></script>
-		<script src="../static/editormd.min.js"></script>
-		<script type="text/javascript">
-		    $(function() {
-		        var editor = editormd("editormd", {
-		            path : "../static/lib/" // Autoload modules mode, codemirror, marked... dependents libs path
-		        });        
-		    });
-		</script>
 	</body>
 </html>
+{%extends "base.html"%}
+{%block head%}
+{{super()}}
+<link rel="stylesheet" href="../static/css/editormd.min.css" />
+<link rel="stylesheet" href="../static/css/style.css" />
+{%endblock%}
+{%block page_content%}
+<div class="layout">
+	<div id="editormd">
+	    <textarea style="display:none;">### 用markdown写下你的想法吧 !</textarea>
+	</div>
+</div>
+		
+	<script src="../static/js/Douyufanjquery.min.js"></script>
+	<script src="../static/editormd.min.js"></script>
+	<script type="text/javascript">
+	    $(function() {
+	        var editor = editormd("editormd", {
+	            path : "../static/lib/" 
+	        });        
+	    });
+	</script>
+{%endblock%}
