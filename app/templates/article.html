@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block head%}
+{{super()}}
+<link rel="stylesheet" href="../static/css/md.css" />
+{% endblock%}
+{% block content %}
+{{ super() }}
+<div class="container">
+	{%if current_user.is_authenticated%}
+		{%if post%}
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title"><a href="https://localhost:5000/post/{{post.title}}">{{post.title}}</a></h3>
+					<br>
+					<h4>{{current_user.username}} wrote at {{post.date}}</h4>
+					</div>
+					<div class="panel-body">
+					{{ post.body | markdown }}
+				</div>
+			</div>
+			<h4> 	<strong>评论区</strong> </h4>
+			{%if comments%}
+				{%for comment in comments%}
+					<div class="panel panel-default">
+						<div class="panel-heading">{{comment.commenter}}</div>
+						<div class="panel-body">
+							{{comment.content}}						
+						</div>
+					</div>
+				{%endfor%}
+			{%else%}
+			<h5>暂无评论</h5>
+			{%endif%}
+			<form action="{{url_for('main.getComment',title=post.title)}}" method="post">
+				<div class="panel panel-info">
+					<div class="panel-heading">添加评论</div>
+					<div class="panel-body">
+						<div class="input-group input-group-lg" id="commnet-input">
+						  <textarea name="comment" id="comment-area" cols="30" rows="10"></textarea>
+						</div>					
+					</div>
+				</div>
+				<div>
+					<input type="submit" name="submit" value="评论" style="padding: 5px; float:left">
+				</div>
+			</form>
+		{%else%}
+			<h2>还没有发表过文章，<a href="{{url_for('main.posts')}}">去写一篇</a> </h2>
+		{%endif%}
+	{%else%}
+		<h2>还未登陆，<a href="{{url_for('auth.login')}}">去登陆</a></h2>
+	{%endif%}
+</div>
+{% endblock %}

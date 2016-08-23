@@ -11,7 +11,7 @@ from flask.ext.login import login_required, current_user
 
 from . import main
 from mainForms import ProfileForm, PostForm
-from ..models import Profile, Post
+from ..models import Profile, Post, Comment
 
 
 @main.before_app_request
@@ -55,10 +55,12 @@ def posts():
     if request.method == 'POST':
         title = request.form['post_title']
         body = request.form['editormd-markdown-doc']
+        preview = body[:50]
         date = datetime.now()
         user = current_user
         if request.form['post_title']:
-            post = Post(user=user.id, title=title, body=body, date=date)
+            post = Post(user=user.id, title=title, body=body,
+                        date=date, preview=preview)
             post.save()
             posts = []
             for post in Post.objects(user=user.id):
@@ -71,9 +73,23 @@ def posts():
 @login_required
 def getpost(title):
     if title:
-        posts = []
-        for post in Post.objects(title=title):
-            posts.append(post)
-        if post is not None:
-            return render_template('index.html', posts=posts)
+        posts = Post.objects(title=title).first()
+        if posts is not None:
+            comments = Comment.objects(post=posts.id)
+            return render_template('article.html', post=posts, comments=comments)
     return redirect(url_for('main.main_index'))
+
+
+@main.route('/comment/<string:title>', methods=['GET', 'POST'])
+@login_required
+def getComment(title):
+    if title:
+        if request.method == "POST":
+            comment = request.form['comment']
+            posts = Post.objects(title=title).first().id
+            date = datetime.now()
+            username = current_user.username
+            newComment = Comment(post=posts, content=comment,
+                                 date=date, commenter=username)
+            newComment.save()
+            return redirect(url_for('main.getpost', title=title))

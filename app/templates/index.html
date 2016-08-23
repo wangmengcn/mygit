@@ -5,11 +5,20 @@
 	{%if current_user.is_authenticated%}
 		{%if posts%}
 			{%for post in posts%}
-				<h2><a href="https://localhost:5000/post/{{post.title}}">{{post.title}}</a></h2>
-					{{ post.body | markdown }}
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title"><a href="https://localhost:5000/post/{{post.title}}">{{post.title}}</a></h3>
+				  	<br>
+		  			<h4>{{current_user.username}} wrote at {{post.date}}</h4>
+				  </div>
+				  <div class="panel-body">
+				    {{ post.preview | markdown }}
+				  </div>
+				  <div class="panel-footer"><a href="https://localhost:5000/post/{{post.title}}">阅读全文</a></div>
+				</div>					
 			{%endfor%}
 		{%else%}
-			<h2>还没有发表过文章，<a href="{{url_for('main.main_index')}}">去写一篇</a> </h2>
+			<h2>还没有发表过文章，<a href="{{url_for('main.posts')}}">去写一篇</a> </h2>
 		{%endif%}
 	{%else%}
 		<h2>还未登陆，<a href="{{url_for('auth.login')}}">去登陆</a></h2>

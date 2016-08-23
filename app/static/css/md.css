@@ -26,6 +26,17 @@
 	float: right;
 }
 
+#comment-area {
+	width: 100%;
+	height: 100%
+}
+
+#commnet-input {
+	width: 100%;
+	height: 150px;
+}
+
+
 .txt-input {
 	width:100%;
 	height:100%;
