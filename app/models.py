@@ -56,13 +56,14 @@ class Post(db.Document):
     title = db.StringField(max_length=50)
     tag = db.ListField()
     body = db.StringField(max_length=10000)
+    preview = db.StringField(max_length=200)
     date = db.DateTimeField()
 
 
 class Comment(db.Document):
     """docstring for Comments"""
     post = db.ReferenceField(Post)
-    commenter = db.ReferenceField(User)
+    commenter = db.StringField(max_length=20)
     content = db.StringField(max_length=200)
     date = db.DateTimeField()
 
