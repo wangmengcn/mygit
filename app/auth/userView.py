@@ -8,7 +8,7 @@
 from flask import redirect, url_for, request, render_template, flash
 from flask.ext.login import login_user, current_user
 from . import auth
-from ..models import User
+from ..models import User, Post
 from authforms import LoginForm, RegisterForm
 
 
@@ -41,6 +41,10 @@ def login():
             user = User.objects(username=form.username.data).first()
             if user is not None and user.verify_password(form.password.data):
                 login_user(user, form.rememberme.data)
-                return render_template('index.html', current_user=user)
+                posts = []
+                for post in Post.objects(user=current_user.id):
+                    posts.append(post)
+                return redirect(url_for('main.main_index', posts=posts))
+                # return render_template('index.html', current_user=user)
             flash('Invalid username or password.')
         return render_template('auth/login.html', form=form)
