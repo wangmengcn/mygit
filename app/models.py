@@ -50,6 +50,7 @@ class Profile(db.Document):
     position = db.StringField(max_length=30)
     bio = db.StringField(max_length=50)
 
+
 class Post(db.Document):
     """docstring for Post"""
     user = db.ReferenceField(User)
@@ -68,7 +69,25 @@ class Comment(db.Document):
     date = db.DateTimeField()
 
 
+class Stared(db.Document):
+    """docstring for Stared"""
+    user = db.ReferenceField(User)
+    stared = db.ListField()
 
 
-        
-    
+class Starring(db.Document):
+    """docstring for Starring"""
+    user = db.ReferenceField(User)
+    starring = db.ListField()
+
+
+class Liked(db.Document):
+    """docstring for Likeed"""
+    post = db.ReferenceField(Post)
+    liked = db.ListField()
+
+
+class Liking(db.Document):
+    """docstring for Liking"""
+    user = db.ReferenceField(User)
+    liking = db.ListField()
