@@ -95,3 +95,9 @@ ENV/
 # SSL files
 *.crt
 *.key
+# ssl files
+*.crt
+*.key
+
+# pycharm
+.idea/
