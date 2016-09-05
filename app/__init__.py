@@ -40,4 +40,7 @@ def createApp(name):
     from .settings import setting as settingBluePrint
     app.register_blueprint(settingBluePrint, url_prefix='/setting')
 
+    from .api_v_1_0 import api as apiBluePrint
+    app.register_blueprint(apiBluePrint, url_prefix='/api')
+
     return app
