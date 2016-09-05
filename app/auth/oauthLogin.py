@@ -39,6 +39,7 @@ def oauth_callback():
     code = request.args.get('code', 1, type=str)
     oauth = OAuthSignIn.getProvider('Github')
     logininfo = oauth.callback(code)
+    print logininfo
     flag = User.objects(username=logininfo['login'])
     user = User(username=logininfo['login'], avatar_url=logininfo[
         'avatar_url'], html_url=logininfo['html_url'])

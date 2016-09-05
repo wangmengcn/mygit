@@ -5,41 +5,14 @@
 # @Link    : https://eclipsesv.com
 # @Version : $Id$
 
+from app.api_v_1_0 import githubData
 
-from flask import Flask
-from flask_mongoengine import MongoEngine
-from app.config import config
-from app.models import User, Profile
-from mongoengine import base
+username = "wangmengcn"
+userinfo = githubData.getBasicInfo(username)
 
-testapp = Flask(__name__)
-testapp.config.from_object(config['default'])
-db = MongoEngine(app=testapp)
+print userinfo
 
-user = User.objects(username='abc').first()
-if user:
-    profile = Profile()
-    profile.user = user
-    profile.location = 'ShiJiaZhuang'
-    profile.job = 'coder'
-    profile.position = None
-    profile.filed = 'asdadadasd'
-
-    print profile.id
-    profile.save()
-    print profile.id
-    getprofile = Profile.objects(user=user).first()
-    print getprofile
-    print getprofile.filed
-    print getprofile.location
-
-id = user.id
-print type(id)
-print str(id)
-print user.get_id
-
-newuser = User.query(id)
-testid = base.fields.ObjectIdField(newuser)
-print newuser
-print type(testid)
-print testid.to_mongo(testid)
+followers = githubData.getFllowers(userinfo)
+if followers:
+    for item in followers:
+        print item
